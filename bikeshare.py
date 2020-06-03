@@ -24,8 +24,8 @@ def get_filters():
     print('Hello! Let\'s explore some US bikeshare data!')
     # TO DO: get user input for city (chicago, new york city, washington). HINT: Use a while loop to handle invalid inputs
     input0 = input("Write the name of one of these cities to see its data: Chicago, New York, Washington\n")
-    possible_input0 = ['Chicago', 'New York', 'Washington', 'chicago', 'new york', 'washington', 'Return', 'return']
-    m0 = "Please repeat your answer with one of the following options:  Chicago, New York, Washington or return \n"
+    possible_input0 = ['Chicago', 'New York', 'Washington', 'chicago', 'new york', 'washington']
+    m0 = "Please repeat your answer with one of the following options:  Chicago, New York, Washington\n"
     city = check_input(input0,possible_input0,m0).lower()
     
     input1 = input('Write one of the following filters: month, day, both, none \n')
@@ -209,7 +209,7 @@ def main():
         user_stats(df)
 
         restart = input('\nWould you like to restart? Enter yes or no.\n')
-        if restart.lower() != 'yes':
+        if restart.lower() != 'yes' and restart.lower() != 'Yes':
             break
 
 
