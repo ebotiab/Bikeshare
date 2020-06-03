@@ -1,19 +1,15 @@
 import time
 import pandas as pd
-import numpy as np
 
 CITY_DATA = { 'chicago': 'chicago.csv',
               'new york city': 'new_york_city.csv',
               'washington': 'washington.csv' }
 
 def check_input(inp, possible_inputs, message):
-    answer = False
-    while not answer:
+    while True:
         if inp in possible_inputs:
-            answer = True
-            break
+            return inp
         inp = input(message)
-    return inp
 
 def get_filters():
     """
@@ -26,23 +22,21 @@ def get_filters():
     """
     print('Hello! Let\'s explore some US bikeshare data!')
     # TO DO: get user input for city (chicago, new york city, washington). HINT: Use a while loop to handle invalid inputs
+    input0 = input("Write the name of one of these cities to see its data: Chicago, New York, Washington\n")
     possible_input0 = ['Chicago', 'New York', 'Washington', 'chicago', 'new york', 'washington', 'Return', 'return']
-    input0 = input("Write the name of one of these cities to see its data: Chicago, New York, Washington.\
-                If you want to exit, write 'return' in the console \n")
     m0 = "Please repeat your answer with one of the following options:  Chicago, New York, Washington or return \n"
     city = check_input(input0,possible_input0,m0).lower()
     
-    possible_input1 = ['month', 'day', 'both', 'none','Month', 'Day', 'Both', 'None']
     input1 = input('Write one of the following filters: month, day, both, none \n')
-    m1 = "Please repeat your answer with one of the following options:  Chicago, New York, Washington or return \n"
+    possible_input1 = ['month', 'day', 'both', 'none','Month', 'Day', 'Both', 'None']
+    m1 = "Please repeat your answer with one of the following options:  month, day, both or none \n"
     input1 = check_input(input1,possible_input1,m1).lower()
     
     # TO DO: get user input for month (all, january, february, ... , june)
     if input1.lower() == 'month' or input1.lower() == 'none':
-        possible_input2 = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December',
-                           'january', 'february', 'march', 'april', 'may', 'june', 'july', 'august', 'september', 'october', 'november', 'december']
-        input2 = input("Write the name of \n")
-        m2 = input("Please repeat your answer with the name of the month you have chosen\n")
+        input2 = input("With which month of the year do you want to filter the data?\n")
+        possible_input2 = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December', 'january', 'february', 'march', 'april', 'may', 'june', 'july', 'august', 'september', 'october', 'november', 'december']
+        m2 = "Please repeat your answer with the name of the month you have chosen\n"
         month = check_input(input2,possible_input2,m2).lower()
     else:
         month = 'all'
@@ -51,7 +45,7 @@ def get_filters():
     if input1.lower() == 'day' or input1.lower() == 'none':
         possible_input3 = ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday',
                            'monday', 'tuesday', 'wednesday', 'thursday', 'friday', 'saturday', 'sunday']
-        input3 = input("With which day of the week you want to filter? \n")
+        input3 = input("With which day of the week do you want to filter the data? \n")
         m3 = input("Please repeat your answer with the name of the day you have chosen\n")
         day = check_input(input3,possible_input3,m3)
     else:
