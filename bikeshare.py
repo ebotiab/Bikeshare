@@ -30,12 +30,12 @@ def get_filters():
     input0 = input("Write the name of one of these cities to see its data: Chicago, New York, Washington.\
                 If you want to exit, write 'return' in the console \n")
     m0 = "Please repeat your answer with one of the following options:  Chicago, New York, Washington or return \n"
-    city = check_input(input0,possible_input0,m0)
+    city = check_input(input0,possible_input0,m0).lower()
     
     possible_input1 = ['month', 'day', 'both', 'none','Month', 'Day', 'Both', 'None']
     input1 = input('Write one of the following filters: month, day, both, none \n')
     m1 = "Please repeat your answer with one of the following options:  Chicago, New York, Washington or return \n"
-    input1 = check_input(input1,possible_input1,m1)
+    input1 = check_input(input1,possible_input1,m1).lower()
     
     # TO DO: get user input for month (all, january, february, ... , june)
     if input1.lower() == 'month' or input1.lower() == 'none':
@@ -43,9 +43,9 @@ def get_filters():
                            'january', 'february', 'march', 'april', 'may', 'june', 'july', 'august', 'september', 'october', 'november', 'december']
         input2 = input("Write the name of \n")
         m2 = input("Please repeat your answer with the name of the month you have chosen\n")
-        month = check_input(input2,possible_input2,m2)
+        month = check_input(input2,possible_input2,m2).lower()
     else:
-        month = None
+        month = 'all'
         
     # TO DO: get user input for day of week (all, monday, tuesday, ... sunday)
     if input1.lower() == 'day' or input1.lower() == 'none':
@@ -55,7 +55,7 @@ def get_filters():
         m3 = input("Please repeat your answer with the name of the day you have chosen\n")
         day = check_input(input3,possible_input3,m3)
     else:
-        day = None
+        day = 'all'
 
     print('-'*40)
     return city, month, day
@@ -105,16 +105,23 @@ def time_stats(df):
 
     print('\nCalculating The Most Frequent Times of Travel...\n')
     start_time = time.time()
-
+    # convert the Start Time column to datetime
+    df['Start Time'] = pd.to_datetime(df['Start Time'])
     # TO DO: display the most common month
-
-
+    popular_month = int(df['month'].mode())
+    print('The most frequent month is', popular_month,'\n')
+    
     # TO DO: display the most common day of week
-
-
+    popular_day = int(df['day'].mode())
+    print('The most frequent day is', popular_day,'\n')
+    
     # TO DO: display the most common start hour
-
-
+    # extract hour from the Start Time column to create an hour column
+    df['hour'] = df['Start Time'].dt.hour
+    # find the most common hour (from 0 to 23)
+    popular_hour = int(df['hour'].mode())
+    print('The most frequent hour is', popular_hour,'\n')
+    
     print("\nThis took %s seconds." % (time.time() - start_time))
     print('-'*40)
 
