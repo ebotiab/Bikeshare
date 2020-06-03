@@ -1,0 +1,1 @@
+I have not needed to help me in solving tasks in the project from other sources. I have only used the knowledge acquired with Udacity.
