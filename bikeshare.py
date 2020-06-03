@@ -6,6 +6,7 @@ CITY_DATA = { 'chicago': 'chicago.csv',
               'washington': 'washington.csv' }
 
 def check_input(inp, possible_inputs, message):
+    """Ensure that the input is inside of the allowed ones"""
     while True:
         if inp in possible_inputs:
             return inp
@@ -160,13 +161,16 @@ def trip_duration_stats(df):
     start_time = time.time()
 
     # TO DO: display total travel time
-    # extract hour from the End Time column to create an hour column
-    df['End Hour'] = df['End Time'].dt.hour
-    df['Time traveled'] = df['End Hour']-df['Start Hour']
-    print('The total travel time is:',df['Time traveled'].sum())
+    df['End Time'] = pd.to_datetime(df['End Time'])
+    # extract the time of start and end to compute the time traveled
+    Start_Time = df['Start Time'].dt.hour*3600+df['Start Time'].dt.minute*60+df['Start Time'].dt.second
+    End_Time = df['End Time'].dt.hour*3600+df['End Time'].dt.minute*60+df['End Time'].dt.second
+    df['Time traveled'] = End_Time - Start_Time
+    #With Time traveled it is possible to compute the total travel time and mean
+    print('The total travel time is:', df['Time traveled'].sum(), 'seconds')
     
     # TO DO: display mean travel time
-    print('The mean travel time time is:',df['Time traveled'].mean())
+    print('The mean travel time time is:', df['Time traveled'].mean(), 'seconds')
     
     print("\nThis took %s seconds." % (time.time() - start_time))
     print('-'*40)
