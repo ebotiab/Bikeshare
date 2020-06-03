@@ -48,7 +48,7 @@ def get_filters():
         possible_input3 = ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday',
                            'monday', 'tuesday', 'wednesday', 'thursday', 'friday', 'saturday', 'sunday']
         input3 = input("With which day of the week do you want to filter the data? \n")
-        m3 = input("Please repeat your answer with the name of the day you have chosen\n")
+        m3 = "Please repeat your answer with the name of the day you have chosen\n"
         day = check_input(input3,possible_input3,m3)
     else:
         day = 'all'
