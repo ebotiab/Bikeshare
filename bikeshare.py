@@ -34,7 +34,7 @@ def get_filters():
     input1 = check_input(input1,possible_input1,m1).lower()
     
     # TO DO: get user input for month (all, january, february, ... , june)
-    if input1.lower() == 'month' or input1.lower() == 'none':
+    if input1.lower() == 'month' or input1.lower() == 'both':
         input2 = input("With which month of the year do you want to filter the data?\n")
         possible_input2 = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December', 
                            'january', 'february', 'march', 'april', 'may', 'june', 'july', 'august', 'september', 'october', 'november', 'december']
@@ -44,7 +44,7 @@ def get_filters():
         month = 'all'
         
     # TO DO: get user input for day of week (all, monday, tuesday, ... sunday)
-    if input1.lower() == 'day' or input1.lower() == 'none':
+    if input1.lower() == 'day' or input1.lower() == 'both':
         possible_input3 = ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday',
                            'monday', 'tuesday', 'wednesday', 'thursday', 'friday', 'saturday', 'sunday']
         input3 = input("With which day of the week do you want to filter the data? \n")
