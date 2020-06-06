@@ -21,8 +21,6 @@ def get_filters():
         city = input("No data for {}. Please choose from (Chicago, New York City, Washington).\n".format(city))
     city = city.lower()
     input1 = input('Write one of the following filters: month, day, both, none \n')
-    m1 = "Please repeat your answer with one of the following options:  month, day, both or none \n"
-    input1 = check_input(input1,possible_input1,m1)
     while input1.lower() not in ['month', 'day', 'both', 'none']:
         input1 = input("No data for {}. Please choose from (month, day, both, none).\n".format(input1))
     input1 = input1.lower()
