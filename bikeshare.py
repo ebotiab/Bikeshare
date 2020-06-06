@@ -5,13 +5,6 @@ CITY_DATA = { 'chicago': 'chicago.csv',
               'new york city': 'new_york_city.csv',
               'washington': 'washington.csv' }
 
-def check_input(inp, possible_inputs, message):
-    """Ensure that the input is inside of the allowed ones"""
-    while True:
-        if inp in possible_inputs:
-            return inp
-        inp = input(message)
-
 def get_filters():
     """
     Asks user to specify a city, month, and day to analyze.
@@ -23,35 +16,32 @@ def get_filters():
     """
     print('Hello! Let\'s explore some US bikeshare data!')
     # TO DO: get user input for city (chicago, new york city, washington). HINT: Use a while loop to handle invalid inputs
-    input0 = input("Write the name of one of these cities to see its data: Chicago, New York, Washington\n")
-    input0 = input0.lower()
-    possible_input0 = ['chicago', 'new york', 'washington']
-    m0 = "Please repeat your answer with one of the following options:  Chicago, New York, Washington\n"
-    city = check_input(input0,possible_input0,m0)
-    
+    city = input("Write the name of one of these cities to see its data: Chicago, New York, Washington\n")
+    while city.lower() not in ['chicago', 'new york city', 'washington']:
+        city = input("No data for {}. Please choose from (Chicago, New York City, Washington).\n".format(city))
+    city = city.lower()
     input1 = input('Write one of the following filters: month, day, both, none \n')
-    input1 = input1.lower()
-    possible_input1 = ['month', 'day', 'both', 'none']
     m1 = "Please repeat your answer with one of the following options:  month, day, both or none \n"
     input1 = check_input(input1,possible_input1,m1)
-    
+    while input1.lower() not in ['month', 'day', 'both', 'none']:
+        input1 = input("No data for {}. Please choose from (month, day, both, none).\n".format(input1))
+    input1 = input1.lower()
+
     # TO DO: get user input for month (all, january, february, ... , june)
-    if input1.lower() == 'month' or input1.lower() == 'both':
-        input2 = input("With which month of the year do you want to filter the data?\n")
-        input2 = input2.lower()
-        possible_input2 = ['january', 'february', 'march', 'april', 'may', 'june', 'july', 'august', 'september', 'october', 'november', 'december']
-        m2 = "Please repeat your answer with the name of the month you have chosen\n"
-        month = check_input(input2,possible_input2,m2)
+    if input1 == 'month' or input1 == 'both':
+        month = input("With which month of the year do you want to filter the data?\n")
+        while month.lower() not in ['january', 'february', 'march', 'april', 'may', 'june']:
+            month = input("No data for {}. Please choose from (january, february, march, april, may, june).\n".format(month))        
+        month = month.lower()
     else:
         month = 'all'
         
     # TO DO: get user input for day of week (all, monday, tuesday, ... sunday)
-    if input1.lower() == 'day' or input1.lower() == 'both':
-        input3 = input("With which day of the week do you want to filter the data? \n")
-        input3 = input3.lower()
-        possible_input3 = ['monday', 'tuesday', 'wednesday', 'thursday', 'friday', 'saturday', 'sunday']
-        m3 = "Please repeat your answer with the name of the day you have chosen\n"
-        day = check_input(input3,possible_input3,m3)
+    if input1 == 'day' or input1 == 'both':
+        day = input("With which day of the week do you want to filter the data? \n")
+        while day.lower() not in ['monday', 'tuesday', 'wednesday', 'thursday', 'friday', 'saturday', 'sunday']:
+            day = input("No data for {}. Please choose from (monday, tuesday, wednesday, thursday, friday, saturday, sunday).\n".format(day))
+        day = day.lower()        
     else:
         day = 'all'
 
@@ -206,11 +196,6 @@ def main():
     while True:
         city, month, day = get_filters()
         df = load_data(city, month, day)
-        if df.shape[0]==0:
-            restart = input('\nSorry, there is no data with these filters, would you like to restart? Enter yes or no.\n')
-            if restart.lower() != 'yes' and restart.lower() != 'Yes':
-                break
-            continue
         time_stats(df)
         station_stats(df)
         trip_duration_stats(df)
